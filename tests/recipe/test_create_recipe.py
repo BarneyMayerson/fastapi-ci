@@ -78,9 +78,7 @@ def test_it_can_create_a_recipe(client, db_session):
     assert response.json()["cooking_time"] == 30
     assert "ingredients" in response.json()
 
-    db_recipe = (
-        db_session.query(Recipe).filter(Recipe.id == response.json()["id"]).first()
-    )
+    db_recipe = db_session.query(Recipe).filter(Recipe.id == response.json()["id"]).first()
 
     assert db_recipe is not None, "Запись не найдена в базе данных"
     assert db_recipe.title == recipe_data["title"]
