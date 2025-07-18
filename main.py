@@ -1,5 +1,5 @@
 import os
-from typing import Any, Generator
+from typing import Generator
 
 from fastapi import Depends, FastAPI, HTTPException
 from sqlalchemy import asc, desc
