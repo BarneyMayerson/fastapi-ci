@@ -1,9 +1,9 @@
-from typing import Generator, Any
+from typing import Any, Generator
 
 import pytest
 from fastapi.testclient import TestClient
-from sqlalchemy import create_engine, Engine
-from sqlalchemy.orm import sessionmaker, Session
+from sqlalchemy import Engine, create_engine
+from sqlalchemy.orm import Session, sessionmaker
 
 from database import Base
 from main import app, get_db
