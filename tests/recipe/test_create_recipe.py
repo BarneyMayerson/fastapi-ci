@@ -1,7 +1,7 @@
 import pytest
 from fastapi import status
 
-from module_30_ci_linters.homework.models import Recipe
+from models import Recipe
 
 
 @pytest.mark.parametrize(

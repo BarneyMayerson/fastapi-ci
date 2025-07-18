@@ -3,8 +3,12 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from fastapi.testclient import TestClient
 
-from module_30_ci_linters.homework.main import app, get_db
-from module_30_ci_linters.homework.database import Base
+from database import Base
+from main import app, get_db
+
+
+# from .main import app, get_db
+# from .database import Base
 
 
 @pytest.fixture(scope="session")

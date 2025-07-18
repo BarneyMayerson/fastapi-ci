@@ -2,8 +2,8 @@ import os
 from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy import desc, asc
 from sqlalchemy.orm import Session
-from module_30_ci_linters.homework.database import init_db, SessionLocal
-from module_30_ci_linters.homework import schemas, crud, models
+import schemas, crud, models
+from database import SessionLocal, init_db
 
 if not os.path.exists("recipes.db"):
     init_db()

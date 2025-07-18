@@ -1,5 +1,5 @@
 from fastapi import status
-from module_30_ci_linters.homework.models import Recipe
+from models import Recipe
 
 
 def test_get_recipe_by_id(client, db_session):

@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
-from module_30_ci_linters.homework.models import Recipe
-from module_30_ci_linters.homework.schemas import RecipeCreate
+from models import Recipe
+from schemas import RecipeCreate
 
 
 def create_recipe(db: Session, recipe: RecipeCreate):

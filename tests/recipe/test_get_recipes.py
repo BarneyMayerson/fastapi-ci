@@ -1,5 +1,5 @@
 from fastapi import status
-from module_30_ci_linters.homework.models import Recipe
+from models import Recipe
 
 
 def test_it_can_get_recipes_sorted_by_views_and_cooking_time(client, db_session):

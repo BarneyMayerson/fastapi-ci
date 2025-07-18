@@ -1,6 +1,6 @@
 from sqlalchemy import Integer, String, JSON
 from sqlalchemy.orm import Mapped, mapped_column
-from module_30_ci_linters.homework.database import Base
+from database import Base
 
 
 class Recipe(Base):
