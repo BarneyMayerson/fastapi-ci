@@ -27,7 +27,7 @@ app = FastAPI(
 
 
 # Зависимость для получения сессии БД
-def get_db() -> Generator[Session]:
+def get_db() -> Generator[Session, None, None]:
     db = SessionLocal()
     try:
         yield db
