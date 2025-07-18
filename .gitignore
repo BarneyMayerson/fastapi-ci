@@ -1,0 +1,41 @@
+# Игнорировать стандартные директории и файлы Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Виртуальное окружение
+.venv/
+venv/
+env/
+ENV/
+
+# Файлы/папки IDE и редакторов
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Объекты тестового запуска pytest
+*.log
+.cache/
+.pytest_cache/
+htmlcov/
+.coverage
+.tox/
+
+# Файлы настроек и окружения
+.env
+*.env
+*.local
+
+# Автоматически генерируемые файлы
+*.egg-info/
+dist/
+build/
+
+# Jupyter Notebooks checkpoints
+.ipynb_checkpoints/
+
+# Системные файлы
+.DS_Store
+Thumbs.db
