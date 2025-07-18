@@ -1,8 +1,12 @@
 import os
-from fastapi import FastAPI, Depends, HTTPException
-from sqlalchemy import desc, asc
+
+from fastapi import Depends, FastAPI, HTTPException
+from sqlalchemy import asc, desc
 from sqlalchemy.orm import Session
-import schemas, crud, models
+
+import crud
+import models
+import schemas
 from database import SessionLocal, init_db
 
 if not os.path.exists("recipes.db"):
