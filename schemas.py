@@ -1,3 +1,5 @@
+from typing import Any
+
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 
@@ -13,7 +15,7 @@ class RecipeCreate(RecipeBase):
     ingredients: list[str] = Field(min_length=1)
 
     @field_validator("ingredients")
-    def validate_ingredients(cls, value):
+    def validate_ingredients(cls, value: Any) -> Any:
         if not all(ingredient.strip() for ingredient in value):
             raise ValueError("Ингредиенты не могут быть пустыми")
 

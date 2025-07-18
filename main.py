@@ -1,8 +1,13 @@
 import os
-from fastapi import FastAPI, Depends, HTTPException
-from sqlalchemy import desc, asc
+from typing import Generator
+
+from fastapi import Depends, FastAPI, HTTPException
+from sqlalchemy import asc, desc
 from sqlalchemy.orm import Session
-import schemas, crud, models
+
+import crud
+import models
+import schemas
 from database import SessionLocal, init_db
 
 if not os.path.exists("recipes.db"):
@@ -22,7 +27,7 @@ app = FastAPI(
 
 
 # Зависимость для получения сессии БД
-def get_db():
+def get_db() -> Generator[Session, None, None]:
     db = SessionLocal()
     try:
         yield db
@@ -31,7 +36,7 @@ def get_db():
 
 
 @app.get("/recipes/", response_model=list[schemas.Recipe], tags=["Рецепты"])
-def get_recipes(db: Session = Depends(get_db)):
+def get_recipes(db: Session = Depends(get_db)) -> list[schemas.Recipe]:
     """Возвращает список рецептов, отсортированный по популярности (views) и времени готовки."""
     recipes = (
         db.query(models.Recipe)
@@ -41,11 +46,11 @@ def get_recipes(db: Session = Depends(get_db)):
         )
         .all()
     )
-    return recipes
+    return [schemas.Recipe.model_validate(recipe) for recipe in recipes]
 
 
 @app.get("/recipes/{recipe_id}", response_model=schemas.Recipe, tags=["Рецепты"])
-def get_recipe(recipe_id: int, db: Session = Depends(get_db)):
+def get_recipe(recipe_id: int, db: Session = Depends(get_db)) -> type[schemas.Recipe]:
     """
     Возвращает детальную информацию о рецепте по его ID.
     При каждом запросе увеличивает счётчик просмотров (views) на 1.
@@ -63,6 +68,6 @@ def get_recipe(recipe_id: int, db: Session = Depends(get_db)):
 
 
 @app.post("/recipes/", response_model=schemas.Recipe, tags=["Рецепты"])
-def create_recipe(recipe: schemas.RecipeCreate, db: Session = Depends(get_db)):
+def create_recipe(recipe: schemas.RecipeCreate, db: Session = Depends(get_db)) -> schemas.Recipe:
     """Создаёт новый рецепт."""
     return crud.create_recipe(db=db, recipe=recipe)

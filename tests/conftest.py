@@ -1,18 +1,16 @@
+from typing import Any, Generator
+
 import pytest
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
 from fastapi.testclient import TestClient
+from sqlalchemy import Engine, create_engine
+from sqlalchemy.orm import Session, sessionmaker
 
 from database import Base
 from main import app, get_db
 
 
-# from .main import app, get_db
-# from .database import Base
-
-
 @pytest.fixture(scope="session")
-def engine():
+def engine() -> Generator[Engine, None, None]:
     """Фикстура для создания Engine (один раз на все тесты)"""
     engine = create_engine(
         "sqlite:///:memory:",
@@ -24,7 +22,7 @@ def engine():
 
 
 @pytest.fixture
-def db_session(engine):
+def db_session(engine: Engine) -> Generator[Session, None, None]:
     """Фикстура для изолированной сессии БД (откат после теста)"""
     connection = engine.connect()
     transaction = connection.begin()
@@ -42,6 +40,6 @@ def db_session(engine):
 
 
 @pytest.fixture
-def client(db_session):
+def client(db_session: Session) -> Any:
     """Фикстура для TestClient с подменённой БД"""
     yield TestClient(app)
