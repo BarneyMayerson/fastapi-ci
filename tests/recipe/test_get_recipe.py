@@ -1,9 +1,12 @@
+from typing import Any
+
 from fastapi import status
+from sqlalchemy.orm import Session
 
 from models import Recipe
 
 
-def test_get_recipe_by_id(client, db_session):
+def test_get_recipe_by_id(client: Any, db_session: Session) -> None:
     # Тестовый рецепт
     recipe_data = {
         "title": "Паста Карбонара",
@@ -28,7 +31,7 @@ def test_get_recipe_by_id(client, db_session):
     assert data["views"] == 1  # Проверяем, что счетчик views увеличился на 1
 
 
-def test_get_nonexistent_recipe(client):
+def test_get_nonexistent_recipe(client: Any) -> None:
     # Пытаемся получить несуществующий рецепт
     response = client.get("/recipes/999999")
     assert response.status_code == status.HTTP_404_NOT_FOUND

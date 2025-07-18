@@ -9,6 +9,6 @@ SessionLocal = sessionmaker(bind=engine)
 Base = declarative_base()
 
 
-def init_db():
+def init_db() -> None:
     """Функция для создания таблиц в БД"""
     Base.metadata.create_all(bind=engine)

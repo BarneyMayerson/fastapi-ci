@@ -1,9 +1,12 @@
+from typing import Any
+
 from fastapi import status
+from sqlalchemy.orm import Session
 
 from models import Recipe
 
 
-def test_it_can_get_recipes_sorted_by_views_and_cooking_time(client, db_session):
+def test_it_can_get_recipes_sorted_by_views_and_cooking_time(client: Any, db_session: Session) -> None:
     # Тестовые данные
     recipes_data = [
         {"title": "Рецепт 1", "cooking_time": 20, "views": 100, "ingredients": ["a"]},

@@ -4,7 +4,7 @@ from models import Recipe
 from schemas import RecipeCreate
 
 
-def create_recipe(db: Session, recipe: RecipeCreate):
+def create_recipe(db: Session, recipe: RecipeCreate) -> Recipe:
     db_recipe = Recipe(**recipe.model_dump(), views=0)
 
     db.add(db_recipe)

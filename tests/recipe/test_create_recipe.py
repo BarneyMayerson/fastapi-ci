@@ -1,5 +1,8 @@
+from typing import Any
+
 import pytest
 from fastapi import status
+from sqlalchemy.orm import Session
 
 from models import Recipe
 
@@ -59,12 +62,12 @@ from models import Recipe
         ),
     ],
 )
-def test_recipe_validation(client, data, expected_status):
+def test_recipe_validation(client: Any, data: list, expected_status: str) -> None:
     response = client.post("/recipes/", json=data)
     assert response.status_code == expected_status
 
 
-def test_it_can_create_a_recipe(client, db_session):
+def test_it_can_create_a_recipe(client: Any, db_session: Session) -> None:
     recipe_data = {
         "title": "Паста Карбонара",
         "cooking_time": 30,
